@@ -5,7 +5,10 @@ const listContacts = async (req, res, next) => {
     const { page = 1, limit = 10, favorite = false } = req.query
 
     const contacts = await Contact.find(
-      { owner: req.user._id, favorite },
+      {
+        owner: req.user._id,
+        favorite
+      },
       '',
       {
         skip: (+page - 1) * +limit,

@@ -9,7 +9,10 @@ const JoiUserSchema = Joi.object({
   email: Joi.string().pattern(emailRegExp).required(),
   password: Joi.string().min(6).required(),
   subscription: Joi.string().valid('starter', 'pro', 'business'),
+  avatarURL: Joi.string(),
   token: Joi.string(),
+  verify: Joi.boolean(),
+  verifyToken: Joi.string(),
 })
 
 const userSchema = Schema({
@@ -35,6 +38,16 @@ const userSchema = Schema({
     token: {
       type: String,
       default: null,
+    },
+
+    verify: {
+      type: Boolean,
+      default: false,
+    },
+
+    verifyToken: {
+      type: String,
+      required: [true, 'Verify token is required'],
     },
   }
 
