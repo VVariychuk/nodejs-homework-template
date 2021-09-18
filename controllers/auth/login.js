@@ -1,4 +1,4 @@
-const { Unauthorized } = require('http-errors')
+const { Unauthorized, InternalServerError } = require('http-errors')
 const jwt = require('jsonwebtoken')
 
 const { User } = require('../../model')
@@ -9,6 +9,10 @@ const login = async (req, res) => {
 
   if (!user) {
     throw new Unauthorized('Invalid email/password')
+  }
+
+  if (!user.verify) {
+    throw new InternalServerError('Email not verify')
   }
 
   const compareResult = user.comparePassword(password)
