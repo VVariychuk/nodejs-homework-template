@@ -23,6 +23,4 @@ app.use((err, _, res, __) => {
   res.status(500).json({ message: err.message })
 })
 
-console.log()
-
 module.exports = app
